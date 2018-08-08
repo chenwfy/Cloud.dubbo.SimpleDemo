@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: blockchainWallet-chainApiService
+  http:
+      encoding:
+        charset: UTF-8
+      multipart:
+        max-file-size: 50Mb
+        max-request-size: 200Mb
+
+server:
+  port: 9013
+  connection-timeout: 5000
+  tomcat:
+    max-threads: 100
+    min-spare-threads: 20
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9010/eureka/

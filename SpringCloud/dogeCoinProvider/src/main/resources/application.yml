@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: blockchainWallet-dogeCoinProvider
+
+server:
+  port: 9012
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.8.47:9010/eureka/
+  instance:
+    preferIpAddress: true
+    ipAddress: 192.168.8.47
+    hostname: 192.168.8.47
+    instanceId: ${eureka.instance.ipAddress}:${server.port}

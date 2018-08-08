@@ -1,0 +1,23 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+    multipart:
+      max-file-size: 50Mb
+      max-request-size: 200Mb
+
+logging:
+  config: classpath:logback.xml
+  level:
+    root: info
+    org:
+      springframework:
+        web: info
+      hibernate: error
+
+server:
+  port: 9013
+  connection-timeout: 5000
+  tomcat:
+    max-threads: 100
+    min-spare-threads: 20

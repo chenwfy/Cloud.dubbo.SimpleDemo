@@ -1,0 +1,5 @@
+rootProject.name = 'com.gwsoft.blockchainWallet'
+include 'chainCoinProvider'
+include 'bitcoinProtocolProvider'
+include 'openApiService'
+

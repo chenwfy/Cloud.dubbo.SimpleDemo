@@ -1,0 +1,12 @@
+ext.projectIds = ['group': 'com.gwsoft.blockchainWallet', 'version': '1.0']
+group = projectIds.group
+version = projectIds.version
+
+project(':serviceCenter') {
+}
+
+project(':chainProvider') {
+}
+
+project(':dogeCoinProvider') {
+}

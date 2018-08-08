@@ -1,0 +1,76 @@
+group 'com.gwsoft.blockchainWallet'
+version '1.0'
+
+buildscript {
+    ext {
+        spring_boot_version = '1.5.9.RELEASE'
+    }
+
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        maven { url "http://repo.spring.io/plugins-release" }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    maven { url "http://repo.spring.io/plugins-release" }
+}
+
+dependencies {
+    compile (
+            "org.springframework.boot:spring-boot-starter:$spring_boot_version",
+            "org.springframework.boot:spring-boot-starter-web:$spring_boot_version",
+            //"com.alibaba.spring.boot:dubbo-spring-boot-starter:1.0.0",
+            "com.alibaba:dubbo:2.6.0",
+            "org.apache.zookeeper:zookeeper:3.4.9",
+            "com.101tec:zkclient:0.10",
+            "ch.qos.logback:logback-core:1.2.3"
+    )
+
+    compile project(":chainCoinProvider")
+
+    testCompile group: "junit", name: "junit", version: "4.12"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$spring_boot_version"
+    runtime "org.springframework.boot:spring-boot-starter-tomcat:$spring_boot_version"
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava.dependsOn(processResources)
+
+springBoot {
+    mainClass = "com.gwsoft.blockchainWallet.BitCoinProtocolProviderApplication"
+}
+
+jar {
+    manifest {
+        attributes("Main-Class": "com.gwsoft.blockchainWallet.BitCoinProtocolProviderApplication")
+    }
+}
+
+task copyDepJars(type: Copy) {
+    from configurations.runtime
+    into 'dist'
+}
+
+task releaseJar(type:Jar, dependsOn: [copyDepJars, classes]) {
+    from 'build/classes/main'
+    from 'build/resources/main/logback.xml'
+    from 'build/web'
+
+    baseName 'bitCoinProtocolService'
+    archiveName "${baseName}-release-${version}.jar"
+    manifest {
+        attributes("Main-Class": "com.gwsoft.blockchainWallet.BitCoinProtocolProviderApplication")
+    }
+}

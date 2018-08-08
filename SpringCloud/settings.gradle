@@ -1,0 +1,6 @@
+rootProject.name = 'com.gwsoft.blockchainWallet'
+include 'serviceCenter'
+include 'chainProvider'
+include 'dogeCoinProvider'
+include 'chainApiService'
+

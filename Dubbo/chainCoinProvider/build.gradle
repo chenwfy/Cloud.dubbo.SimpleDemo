@@ -1,0 +1,11 @@
+group 'com.gwsoft.blockchainWallet'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'java-library'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
